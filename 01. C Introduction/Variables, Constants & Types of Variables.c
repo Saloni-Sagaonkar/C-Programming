@@ -51,10 +51,103 @@ int main(){
 /*------------------------------------------------------------------------------------------------------*/
 
 /*Types of Variables:
-1. Local variable
-2. Global variable
-3. Static variable
-4. External variable
-5. Automatic variable
 
+1. Local variable:
+-	A variable which is declared inside function or block.
+-	The scope is within a function in which they are declared.
+
+2. Global variable:
+-	A variable which is declared outside function or block.
+-	The scope throughout the program. 
 */
+
+#include <stdio.h>
+int globalVar = 20;					//global variable
+void function1()
+{
+	int localVar = 10;				//local variable
+  	printf("%d\n" , localVar);
+}
+void function2()
+{
+  printf("%d\n" , globalVar);
+}
+int main() {
+ 
+  function1();
+  function2();
+    return 0;
+}
+/*Output:
+10
+20
+*/
+
+/*
+3. Static variable:
+- Static variable retains its value within the function calls. 
+- ‘static’ keyword is used to define a static variable
+*/
+
+#include <stdio.h>
+void function(){ 
+	int x = 20;					//local variable 
+	static int y = 30;			//static variable 
+	x = x + 10; 
+	y = y + 10; 
+	printf("\n%d,%d",x,y); 
+} 
+int main() {
+ 
+  	function();
+  	function();
+  	function();
+  	return 0;
+}
+
+/*Output:
+30,40
+30,50
+30,60
+*/
+
+/*
+4. Auto variable:
+- Variables declared inside the block, are automatic variables by default.
+- by default it will be initialized with some garbage (random) value
+- Global variable by default initialize to 0
+*/
+#include <stdio.h>
+void function()
+{
+  int x=10;				//local variable (also automatic) 
+  auto int y=20;		//automatic variable
+  printf("%d,%d",x,y);	//10,20
+}
+int main() {
+ 
+    function();
+    return 0;
+}
+
+/*
+5. External Variable
+- External variables can be shared between multiple C files. 
+- We can declare an external variable using extern keyword.*/
+
+//program.c
+#include "myfile.h"
+#include <stdio.h>  
+
+extern int a;                           //global variable (also extern)
+int main()
+{
+	printf("%d", a);             		//print from other file i.e. a= 5 
+	return 0;
+}
+
+//myfile.h
+int a = 5;
+
+
+
